@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { Route, NavLink, Switch } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import facade from "./loginFacade";
 import flightFacade from "./flightFacade";
-import './NavbarStyle.css';
+import './css/NavbarStyle.css';
 import header from "./images/header.jpg";
 import basket from "./images/basket.svg"
 import madrid from "./images/Madrid.jpg";
 import paris from "./images/Paris.jpg";
 import reykjavik from "./images/Reykjavik.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './myStyles.css';
+import './css/myStyles.css';
+//import SearchEngine from "./components/SearchEngine.js"
 
 
 const Header = (props) => {
@@ -151,7 +153,12 @@ const GetFlights = () => {
   );
 };
 
-
+const SearchEngine = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  return (
+    <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+  );
+};
 
 function App() {
   const init = facade.loggedIn;
@@ -178,7 +185,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/searchpage">
-
+        <SearchEngine/>
         </Route>
         <Route path="/seeallpage">
           <GetFlights />
