@@ -3,11 +3,15 @@ ul.header {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #A2D0EA;
 }
 
-ul.header li {
+ul.header li.li-left {
     float: left;
+}
+
+ul.header li.li-right {
+    float: right;
 }
 
 ul.header li a {
@@ -19,9 +23,9 @@ ul.header li a {
 }
 
 ul.header li a:hover:not(.active) {
-    background-color: #111;
+    background-color: rgb(118, 174, 207);
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: rgb(139, 197, 231);
 }

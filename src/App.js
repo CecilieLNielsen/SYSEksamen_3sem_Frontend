@@ -1,113 +1,86 @@
 import React, { useState, useEffect } from "react"
 import { Route, NavLink, Switch } from "react-router-dom";
 import facade from "./loginFacade";
-import demoFacade from "./demoFacade";
+import flightFacade from "./flightFacade";
 import './NavbarStyle.css';
+import header from "./images/header.jpg";
+import basket from "./images/basket.svg"
+import madrid from "./images/Madrid.jpg";
+import paris from "./images/Paris.jpg";
+import reykjavik from "./images/Reykjavik.jpg";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './myStyles.css';
 
-const Header = () => {
+
+const Header = (props) => {
   return (
     <ul className="header">
-      <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
-      <li><NavLink activeClassName="active" to="/userpage">User page</NavLink></li>
-      <li><NavLink activeClassName="active" to="/adminpage">Admin page</NavLink></li>
-      <li><NavLink activeClassName="active" to="/datapage">Data page</NavLink></li>
-      <li><NavLink activeClassName="active" to="/welcomepage">Welcome page</NavLink></li>
+      <li class="li-left"><NavLink exact activeClassName="active" to="/">Startpage</NavLink></li>
+      <li class="li-left"><NavLink activeClassName="active" to="/searchpage">Search for flight</NavLink></li>
+      <li class="li-left"><NavLink activeClassName="active" to="/seeallpage">See all flights</NavLink></li>
+
+      <li class="li-right"><NavLink activeClassName="active" to="/myprofilepage">My profile</NavLink></li>
+      {!props.loggedIn ?
+        (<li class="li-right"><NavLink activeClassName="active" to="/loginpage">Log in</NavLink></li>) :
+        (<li class="li-right"><button onClick={props.logout}>Log out</button></li>)}
     </ul>
   );
 };
 
 const Home = () => {
-  const init = facade.loggedIn;
-  const [loggedIn, setLoggedIn] = useState(init)
-
-  const logout = () => {
-    facade.logout()
-    setLoggedIn(false)
-  }
-  const login = (user, pass) => {
-    facade.login(user, pass)
-      .then(res => setLoggedIn(true));
-  }
   return (
     <div>
-      <h1>Hello! Just testing home!</h1>
-      {!loggedIn ? (<LogIn login={login} />) : (<LoggedIn logout={logout} />)}
-    </div>
-  );
-};
+       <br/>
+      <h1>Welcome (navn) </h1>
+     
+      <br/>
+      <br/>
+      <br/>
+      <h4>Destinations</h4>
 
-const User = () => {
-  const [userData, setUserData] = useState("Loading...")
+    <br/>
+    <br/>
 
-  useEffect(() => {
-    demoFacade.getUser().then(data => setUserData(data.msg));
-  }, []);
+      <div class="container">
+        <div class="row">
 
-  return (
-    <div>
-      <h1>Hello! Just testing user!</h1>
-      <h2>{userData}</h2>
-    </div>
-  );
-};
+          <div class="col-4">
+            <div class="card my-card">
+              <img src={madrid} class="card-img-top" alt="Madrid" />
+              <div class="card-body">
+                <h5 class="city-madrid">Madrid, Spain</h5>
+                <p class="madrid-description">Madrid is the capital city of Spain, located right in the centre of the Iberian Peninsula. Its geographical location grants good communications of the city with other Spanish regions. As capital of the country, it is the seat to the Spanish government institutions and the city of residence of Spanish Royal family.</p>
+              </div>
+            </div>
+          </div>
 
-const Admin = () => {
-  const [adminData, setAdminData] = useState("Loading...")
+          <div class="col-4">
+            <div class="card my-card">
+              <img src={paris} class="card-img-top" alt="Paris" />
+              <div class="card-body">
+                <h5 class="city-paris">Paris, France</h5>
+                <p class="paris-description">Paris (nicknamed the "City of light") is the capital city of France, and the largest city in France. ... Paris is also the center of French economy, politics, traffic and culture. Paris has many art museums and historical buildings. As a traffic center, Paris has a very good underground subway system (called the Metro).</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="card my-card">
+              <img src={reykjavik} class="card-img-top" alt="Reykjavik" />
+              <div class="card-body">
+                <h5 class="city-reykjavik">Reykjavik, Iceland</h5>
+                <p class="reykjavik-description">Reykjavik is by far the largest municipality in Iceland and as well the capital city of the country. The capital area has about a total of 60% of Iceland’s population, which is about 320.000 people. Reykjavik is the northernmost capital in the world. </p>
+              </div>
+            </div>
+          </div>    
+            </div>
+          </div>
+        </div>
 
-  useEffect(() => {
-    demoFacade.getAdmin().then(data => setAdminData(data.msg));
-  }, []);
 
-  return (
-    <div>
-      <h1>Hello! Just testing admin!</h1>
-      <h2>{adminData}</h2>
-    </div>
-  );
-};
 
-const Data = () => {
-  const init = { 
-    chuck: "", 
-    dad: "",
-    insult:"",
-    awesome:"",
-    planet:""
-   };
 
-   const [dataData, setDataData] = useState(init)
-
-  useEffect(() => {
-    demoFacade.getData().then(data => setDataData(data));
-  }, []);
-
-  return (
-    <div>
-      <h1>Hello! Just testing data!</h1>
-      <h2>{dataData.chuck}</h2>
-      <h2>{dataData.dad}</h2>
-      <h2>{dataData.insult}</h2>
-      <h2>{dataData.awesome}</h2>
-      <h2>{dataData.planet}</h2>
-    </div>
-  );
-};
-
-const Welcome = () => {
-  return (
-    <div>
-    <h1>Instructions to use this project</h1>
-    <h5>1. Clone this project</h5>
-    <h5>2. Change URL</h5>
-    <h5>3. Add functionality</h5>
-    <h5>3. Deploy</h5>
-    </div>
-  );
-};
-
-const NoMatch = () => {
-  return (
-    <h1>Hello! Just testing nomatch!</h1>
+    
   );
 };
 
@@ -119,6 +92,7 @@ function LogIn(props) {
     evt.preventDefault();
     props.login(loginCredentials.username, loginCredentials.password);
   }
+
   const onChange = (evt) => {
     setLoginCredentials({ ...loginCredentials, [evt.target.id]: evt.target.value })
   }
@@ -133,44 +107,87 @@ function LogIn(props) {
       </form>
     </div>
   )
-
 }
-function LoggedIn(props) {
-  const [dataFromServer, setDataFromServer] = useState("Loading...")
+
+const NoMatch = () => {
+  return (
+    <h1>This page does not exist!</h1>
+  );
+};
+
+// Henter alle fly ud
+const GetFlights = () => {
+  const init = [{
+    flightId: "loading",
+    departure: "loading",
+    arrival: "loading",
+    destinationAirport: "loading",
+    takeoffAirport: "loading",
+    price: "loading"
+  }];
+
+  const [flightData, setFlightData] = useState(init);
 
   useEffect(() => {
-    facade.fetchData().then(data => setDataFromServer(data.msg));
+    setFlightData(flightFacade.getFlights())
+    //flightFacade.getFlights().then(data => setFlightData(data));
   }, []);
 
   return (
     <div>
-      <h2>Data Received from server</h2>
-      <h3>{dataFromServer}</h3>
-      <button onClick={props.logout}>Logout</button>
+      <br></br>
+      <h2>List of all flights</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            {Object.keys(flightData[0]).map(header => <th key={header}>{header}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {flightData.map((flight, index) => <tr key={index}><td>{flight.flightId}</td><td>{flight.departure}</td><td>{flight.arrival}</td><td>{flight.destinationAirport}</td><td>{flight.takeoffAirport}</td><td>{flight.price} DKK</td></tr>)}
+        </tbody>
+      </table>
     </div>
-  )
+  );
+};
 
-}
+
 
 function App() {
+  const init = facade.loggedIn;
+  const [loggedIn, setLoggedIn] = useState(init)
+
+  const logout = () => {
+    facade.logout()
+    setLoggedIn(false)
+  }
+  const login = (user, pass) => {
+    facade.login(user, pass)
+      .then(res => setLoggedIn(true));
+  }
+
   return (
     <div>
-      <Header />
+      <div class="my-container">
+        <img class="my-image" src={header} alt="header" />
+        <h1 class="my-image-text">Just Travel</h1>
+      </div>
+      <Header loggedIn={loggedIn} logout={logout}/>
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/userpage">
-          <User />
+        <Route path="/searchpage">
+
         </Route>
-        <Route path="/adminpage">
-          <Admin />
+        <Route path="/seeallpage">
+          <GetFlights />
         </Route>
-        <Route path="/datapage">
-          <Data />
+        <Route path="/myprofilepage">
+
         </Route>
-        <Route path="/welcomepage">
-          <Welcome />
+        <Route path="/loginpage">
+          <LogIn />
         </Route>
         <Route>
           <NoMatch />
