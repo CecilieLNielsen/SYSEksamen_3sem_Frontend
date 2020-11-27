@@ -11,7 +11,7 @@ import paris from "./images/Paris.jpg";
 import reykjavik from "./images/Reykjavik.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/myStyles.css';
-//import SearchEngine from "./components/SearchEngine.js"
+import SearchEngine from "./components/SearchEngine.js"
 
 
 const Header = (props) => {
@@ -32,16 +32,16 @@ const Header = (props) => {
 const Home = () => {
   return (
     <div>
-       <br/>
+      <br />
       <h1>Welcome (navn) </h1>
-     
-      <br/>
-      <br/>
-      <br/>
+
+      <br />
+      <br />
+      <br />
       <h4>Destinations</h4>
 
-    <br/>
-    <br/>
+      <br />
+      <br />
 
       <div class="container">
         <div class="row">
@@ -65,7 +65,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           <div class="col-4">
             <div class="card my-card">
               <img src={reykjavik} class="card-img-top" alt="Reykjavik" />
@@ -74,15 +74,15 @@ const Home = () => {
                 <p class="reykjavik-description">Reykjavik is by far the largest municipality in Iceland and as well the capital city of the country. The capital area has about a total of 60% of Iceland’s population, which is about 320.000 people. Reykjavik is the northernmost capital in the world. </p>
               </div>
             </div>
-          </div>    
-            </div>
           </div>
         </div>
+      </div>
+    </div>
 
 
 
 
-    
+
   );
 };
 
@@ -153,13 +153,6 @@ const GetFlights = () => {
   );
 };
 
-const SearchEngine = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  return (
-    <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-  );
-};
-
 function App() {
   const init = facade.loggedIn;
   const [loggedIn, setLoggedIn] = useState(init)
@@ -179,13 +172,13 @@ function App() {
         <img class="my-image" src={header} alt="header" />
         <h1 class="my-image-text">Just Travel</h1>
       </div>
-      <Header loggedIn={loggedIn} logout={logout}/>
+      <Header loggedIn={loggedIn} logout={logout} />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route path="/searchpage">
-        <SearchEngine/>
+          <SearchEngine />
         </Route>
         <Route path="/seeallpage">
           <GetFlights />
