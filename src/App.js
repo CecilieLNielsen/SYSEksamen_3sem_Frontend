@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Route, NavLink, Switch } from "react-router-dom";
-import DatePicker from "react-datepicker";
+//import DatePicker from "react-datepicker";
 import facade from "./loginFacade";
 import flightFacade from "./flightFacade";
 import './css/NavbarStyle.css';
