@@ -1,22 +1,47 @@
-const SearchEngine = (numberOfRows) => {
+import { useEffect, useState } from "react";
+
+function SearchEngine({setHasSearched, searchBody, setSearchBody}) {
+  
+
+  useEffect(() => {
+   setHasSearched(false)
+  }, [])
+
+  const handleOnChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    setSearchBody({ ...searchBody, [name]: value });
+    setHasSearched(false);
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setHasSearched(true);
+    console.log(searchBody);
+
+  }
   return (
     <div>
-      <label for="fromDestination">From</label>
-      <input type="text" id="fromDestinationId" name="fromDestination" />
-      <label for="toDestination">To</label>
-      <input type="text" id="toDestinationId" name="toDestination" />
+      <form onSubmit={onSubmit}>
+        <label >Destination From</label>
+        <select name="destinationFrom" onChange={handleOnChange} >
+          <option>Vælg destination</option>
+          <option>Copenhagen</option>
+        </select>
 
-      <select name="numberOfPersons" id="numberOfPersonsId">
-        {
-          //make look for int i = 0 i < numberOfRows i++
-        }
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+        <label>Destination To</label>
+        <select name="destinationTo" onChange={handleOnChange}>
+          <option>Vælg destination</option>
+          <option>Barcelona</option>
+          <option>Lissabon</option>
+          <option>Firenze</option>
+        </select>
 
-      <input type="submit" value="Search for flight" />
+        <label>How many passengers</label>
+        <input type="number" name="passengers" onChange={handleOnChange} />
+        <input type="submit" value="Save" />
+      </form>
     </div>
   );
 };
