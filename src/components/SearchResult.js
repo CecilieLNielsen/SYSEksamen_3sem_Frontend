@@ -21,7 +21,7 @@ function SearchResult({ filter }) {
     return (
       <div>
         <h2>Available flights</h2>
-        <CityDetail cityString={postBody} />
+        <CityDetail cityString={filter.to} />
         <br />
         <br />
         {flights.map((flight) => <p key={flight.flightId} >From: {flight.destinationAirportName}, To: {flight.takeoffAirportName}, Departure: {flight.departure}, Arrival: {flight.arrival}, Price: {flight.price} </p>)}

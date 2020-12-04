@@ -54,7 +54,7 @@ function App() {
         </Route>
         <Route path="/searchpage">
           <SearchEngine filter={filter} setFilter={setFilter}/>
-          <SearchResult filter={filter} />
+          <SearchResult filter={filter}/>
         </Route>
         <Route path="/seeallpage">
           <GetFlights />
