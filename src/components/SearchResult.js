@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import CityDetail from './CityDetail'
 import flightFacade from "./flightFacade";
 
 function SearchResult({ filter }) {
@@ -20,17 +21,18 @@ function SearchResult({ filter }) {
     return (
       <div>
         <h2>Available flights</h2>
+        <CityDetail cityString={postBody} />
+        <br />
+        <br />
         {flights.map((flight) => <p key={flight.flightId} >From: {flight.destinationAirportName}, To: {flight.takeoffAirportName}, Departure: {flight.departure}, Arrival: {flight.arrival}, Price: {flight.price} </p>)}
       </div>
     )
   } else {
     return (
       <div>
-        
       </div>
     );
   }
-
 }
 
 export default SearchResult;

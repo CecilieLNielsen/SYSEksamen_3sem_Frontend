@@ -1,9 +1,7 @@
 import React, { useState} from "react"
 import { Route, Switch } from "react-router-dom";
 
-import DatePicker from "react-datepicker";
 import facade from "./components/loginFacade";
-import flightFacade from "./components/flightFacade";
 import SearchEngine from "./components/SearchEngine"
 import Header from './components/Header'
 import GetFlights from './components/GetFlights'
