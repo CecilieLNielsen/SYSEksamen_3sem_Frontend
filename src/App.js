@@ -24,17 +24,15 @@ const NoMatch = () => {
 };
 
 function App() {
-  const init = facade.loggedIn;
-  const [loggedIn, setLoggedIn] = useState(init)
-  const [hasSearched, setHasSearched] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(facade.loggedIn);
 
-  const searchBodyInit = {
-    "destinationFrom": "",
-    "destinationTo": "",
-    "passengers": 0
+  const init = {
+    "from": "",
+    "to": "",
+    "departure": "",
+    "arrival": ""
   }
-
-  let [searchBody, setSearchBody] = useState(searchBodyInit);
+  const [filter, setFilter] = useState(init);
 
   const logout = () => {
     facade.logout()
@@ -57,12 +55,8 @@ function App() {
           <Home />
         </Route>
         <Route path="/searchpage">
-          <SearchEngine setHasSearched={setHasSearched} 
-          searchBody={searchBody}
-          setSearchBody={setSearchBody} />
-          {
-            hasSearched && <SearchResult searchBody={searchBody} />
-          }
+          <SearchEngine filter={filter} setFilter={setFilter}/>
+          <SearchResult filter={filter} />
         </Route>
         <Route path="/seeallpage">
           <GetFlights />

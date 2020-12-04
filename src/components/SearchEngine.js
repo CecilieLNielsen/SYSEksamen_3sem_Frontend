@@ -1,45 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function SearchEngine({setHasSearched, searchBody, setSearchBody}) {
-  
-
-  useEffect(() => {
-   setHasSearched(false)
-  }, [])
+function SearchEngine({filter, setFilter}) {
+  const [searchFilter, setSearchFilter] = useState(filter);
 
   const handleOnChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    setSearchBody({ ...searchBody, [name]: value });
-    setHasSearched(false);
+    setSearchFilter({ ...searchFilter, [name]: value });
   }
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setHasSearched(true);
-    console.log(searchBody);
-
+    setFilter(searchFilter);
   }
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <label >Destination From</label>
-        <select name="destinationFrom" onChange={handleOnChange} >
-          <option>Vælg destination</option>
-          <option>Copenhagen</option>
-        </select>
+        <label>From</label>
+        <input name="from" placeholder="Spain" onChange={handleOnChange} />
 
-        <label>Destination To</label>
-        <select name="destinationTo" onChange={handleOnChange}>
-          <option>Vælg destination</option>
-          <option>Barcelona</option>
-          <option>Lissabon</option>
-          <option>Firenze</option>
-        </select>
+        <label>To</label>
+        <input name="to" placeholder="England" onChange={handleOnChange}/>
+         
+        <label>Arrival date</label>
+        <input name="arrival" placeholder="2021-01-01" onChange={handleOnChange} />
 
-        <label>How many passengers</label>
-        <input type="number" name="passengers" onChange={handleOnChange} />
         <input type="submit" value="Save" />
       </form>
     </div>
