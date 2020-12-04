@@ -1,3 +1,4 @@
+import CityDetail from './CityDetail'
 import { useEffect, useState } from "react"
 
 function SearchResult({ searchBody , }) {
@@ -33,7 +34,7 @@ function SearchResult({ searchBody , }) {
     useEffect(fetchData, [])
     return (
         <div>
-            <h2>Success</h2>
+            <CityDetail cityString={postBody} />
             {flights.map((flight, index) => {
                 return <p key={index} >{flight.destination_from}, {flight.destination_to}, {flight.price} {} </p>
             })}
