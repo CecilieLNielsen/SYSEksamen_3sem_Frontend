@@ -1,5 +1,9 @@
 import {useState, useEffect} from 'react'
 import flightFacade from './flightFacade'
+import axios from "axios";
+import Button from 'react-bootstrap/Button'
+import BookFlight from './BookFlight'
+import Container from 'react-bootstrap/Container'
 // Henter alle fly ud
 function GetFlights() {
     const init = [{
@@ -12,16 +16,28 @@ function GetFlights() {
     }];
   
     const [flightData, setFlightData] = useState(init);
+    const [bookthis, setBookThis] = useState(false);
   
-    useEffect(() => {
-      setFlightData(flightFacade.getFlights())
+    useEffect(async () => {
+      const resulst = await axios(
+        'http://localhost:8080/jpareststarter/api/flight'
+      );
+      setFlightData(resulst.data);
+      
       //flightFacade.getFlights().then(data => setFlightData(data));
     }, []);
+
+    const handleClick = e => 
+    {
+      setBookThis(true)
+    };
   
     return (
-      <div>
+      <div >
+        <Container>
         <br></br>
         <h2>List of all flights</h2>
+        
         <table className="table table-hover">
           <thead>
             <tr>
@@ -29,9 +45,14 @@ function GetFlights() {
             </tr>
           </thead>
           <tbody>
-            {flightData.map((flight, index) => <tr key={index}><td>{flight.flightId}</td><td>{flight.departure}</td><td>{flight.arrival}</td><td>{flight.destinationAirport}</td><td>{flight.takeoffAirport}</td><td>{flight.price} DKK</td></tr>)}
+            {flightData.map((flight, index) => <tr key={index}><td>{flight.flightId}</td>
+            <td>{flight.departure}</td><td>{flight.arrival}</td><td>{flight.destinationAirport}</td>
+            <td>{flight.takeoffAirport}</td><td>{flight.price} DKK</td>
+            <td><input type="button" onClick={handleClick} value="book this flight" /></td></tr>)}
           </tbody>
         </table>
+        </Container>
+        {bookthis ? <BookFlight/> : ""}
       </div>
     );
   };

@@ -2,10 +2,11 @@ import basket from "../images/basket.svg"
 import madrid from "../images/Madrid.jpg";
 import paris from "../images/Paris.jpg";
 import reykjavik from "../images/Reykjavik.jpg";
-
+import Container from 'react-bootstrap/Container'
 function Home() {
     return (
         <div>
+            <Container>
             <br />
             <h1>Welcome (navn) </h1>
 
@@ -51,6 +52,7 @@ function Home() {
                     </div>
                 </div>
             </div>
+            </Container>
         </div>
     );
 };
