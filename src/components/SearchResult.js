@@ -17,6 +17,7 @@ function SearchResult({ filter }) {
   useEffect(() => {
     flightFacade.getFlightsByFilter(filter).then(data => setFlights(data));
   }, [filter]);
+  
   if (flights[0].flightId !== 0) {
     return (
       <div>

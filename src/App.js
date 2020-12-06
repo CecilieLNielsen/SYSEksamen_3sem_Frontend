@@ -24,13 +24,13 @@ const NoMatch = () => {
 function App() {
   const [loggedIn, setLoggedIn] = useState(facade.loggedIn);
 
-  const init = {
+  const initFilter = {
     "from": "",
     "to": "",
     "departure": "",
     "arrival": ""
   }
-  const [filter, setFilter] = useState(init);
+  const [filter, setFilter] = useState(initFilter);
 
   const logout = () => {
     facade.logout()
