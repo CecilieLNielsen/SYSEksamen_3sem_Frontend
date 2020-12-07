@@ -14,6 +14,7 @@ function BookFlight () {
     const nb = { userId: "", flightId: ""};
     const [booking, setBooking] = useState({...nb})
     let [isBlocking, setIsBlocking] = useState(false);
+    const [response, setResponse] = useState("")
     
     const handleChange = e => {
         const { id, value } = e.target;
@@ -23,10 +24,12 @@ function BookFlight () {
       };
       const handleSubmit = e => {
         e.preventDefault();
-        flightFacade.makeBooking(booking);
+        const res = flightFacade.makeBooking(booking);
+        setResponse(res.data)
+        console.log(res)
         setBooking({...nb});
         setIsBlocking(false);
-        
+        console.log()
       };
 
     return (
@@ -42,6 +45,7 @@ function BookFlight () {
                 <br></br>
                 <button  onClick={handleSubmit} >Book it!</button>
             </Form>
+            
             </Container>
         </div>
     )
