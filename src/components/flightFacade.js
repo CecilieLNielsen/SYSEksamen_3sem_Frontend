@@ -43,9 +43,9 @@ function flightFacade() {
 
   const getFlights = () => {
     // MOCK
-    const data = mockData;
+   // const data = mockData;
     // PROD
-    //const data = fetchData("/api/flight/all", "GET");
+    const data = fetchData("/api/flight/", "GET");
     return data;
   }
 
@@ -58,11 +58,22 @@ function flightFacade() {
     const data = fetchData("/api/flight/destination/" + id, "GET");
     return data;
   }
+
+
+
+    const makeBooking = (body) => {
+    const data = fetchData("/api/booking/book", "POST", body)
+    .then(data => console.log(data));
+    return data;
+  }
+    
+  
   
   return {
     getFlights,
     getFlightsByFilter,
     getFlightByDestinationId,
+    makeBooking
   
   }
 }
