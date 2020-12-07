@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import BookFlight from './BookFlight'
 import Container from 'react-bootstrap/Container'
 // Henter alle fly ud
-function GetFlights() {
+const GetFlights = () => {
     const init = [{
       flightId: "loading",
       departure: "loading",

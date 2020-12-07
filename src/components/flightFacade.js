@@ -1,32 +1,5 @@
 import facade from './loginFacade';
-import {baseURL} from "../settings"
-
-const mockData = [
-  {
-    flightId: 1,
-    departure: "09:32:49",
-    arrival: "16:19:02",
-    destinationAirport: "NY Airport",
-    takeoffAirport: "CPH Airport",
-    price: 932
-  },
-  {
-    flightId: 2,
-    departure: "19:57:00",
-    arrival: "02:10:42",
-    destinationAirport: "Alaska Airport",
-    takeoffAirport: "NY Airport",
-    price: 324
-  },
-  {
-    flightId: 3,
-    departure: "00:42:53",
-    arrival: "00:10:43",
-    destinationAirport: "CPH Airport",
-    takeoffAirport: "Sidney Airport",
-    price: 3204
-  }
-];
+import { baseURL } from "../settings"
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -42,15 +15,19 @@ function flightFacade() {
   }
 
   const getFlights = () => {
-    // MOCK
-   // const data = mockData;
-    // PROD
     const data = fetchData("/api/flight/", "GET");
     return data;
   }
 
   const getFlightsByFilter = (filter) => {
-    const data = fetchData("/api/flight/all", "POST", filter);
+    const newFilter = {
+      ...filter, 
+      'departure': dateToString(filter.departure), 
+      'arrival': dateToString(filter.arrival)
+    };
+    console.log(filter);
+    console.log(newFilter);
+    const data = fetchData("/api/flight/all", "POST", newFilter);
     return data;
   }
 
@@ -59,22 +36,26 @@ function flightFacade() {
     return data;
   }
 
-
-
-    const makeBooking = (body) => {
+  const makeBooking = (body) => {
     const data = fetchData("/api/booking/book", "POST", body)
-    .then(data => console.log(data));
+      .then(data => console.log(data));
     return data;
   }
-    
-  
-  
+
+  const dateToString = (date) => {
+    if (date === null) return date; 
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    return `${yyyy}/${mm}/${dd}`;
+  };
+
   return {
     getFlights,
     getFlightsByFilter,
     getFlightByDestinationId,
     makeBooking
-  
+
   }
 }
 
