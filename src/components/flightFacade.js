@@ -62,6 +62,8 @@ function flightFacade() {
 
 
   const makeBooking = (body) => {
+    
+    
     const data = fetchData("/api/booking/book", "POST", body);
     return data;
   }
@@ -72,6 +74,7 @@ function flightFacade() {
     getFlights,
     getFlightsByFilter,
     getFlightByDestinationId,
+    makeBooking
   
   }
 }
