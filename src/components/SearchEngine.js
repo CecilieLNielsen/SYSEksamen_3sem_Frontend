@@ -30,7 +30,7 @@ function SearchEngine({filter, setFilter}) {
         <input name="from" placeholder="Spain" onChange={handleOnChange} />
 
         <label>To</label>
-        <input name="to" placeholder="England" onChange={handleOnChange}/>
+        <input name="to" placeholder="Dubai" onChange={handleOnChange}/>
          
         <label>Pick date</label>
         <Calendar arrival={tempFilter.arrival} onArrivalChange={handleArrivalChange} departure={tempFilter.departure} onDepartureChange={handleDepartureChange}/>

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import CityDetail from './CityDetail'
 import flightFacade from "./flightFacade";
+import flight from "./flightFacade";
 
 function SearchResult({ filter }) {
   const init = [{
     flightId: 0,
     departure: "",
     arrival: "",
-    destinationAirportName: "",
-    takeoffAirportName: "",
+    destinationAirport: "",
+    takeoffAirport: "",
     price: 0
   }
   ];
@@ -18,20 +19,19 @@ function SearchResult({ filter }) {
     flightFacade.getFlightsByFilter(filter).then(data => setFlights(data));
   }, [filter]);
   
-  if (flights[0].flightId !== 0) {
+  if (flights.length > 0 && flights[0].flightId !== 0) {
     return (
       <div>
         <h2>Available flights</h2>
         <CityDetail cityString={filter.to} />
         <br />
         <br />
-        {flights.map((flight) => <p key={flight.flightId} >From: {flight.destinationAirportName}, To: {flight.takeoffAirportName}, Departure: {flight.departure}, Arrival: {flight.arrival}, Price: {flight.price} </p>)}
+        {flights.map((flight) => <p key={flight.flightId} >From: {flight.destinationAirport}, To: {flight.takeoffAirport}, Departure: {flight.departure}, Arrival: {flight.arrival}, Price: {flight.price} </p>)}
       </div>
     )
   } else {
     return (
-      <div>
-      </div>
+      <div></div>
     );
   }
 }

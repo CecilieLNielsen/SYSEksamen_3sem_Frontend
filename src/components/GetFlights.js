@@ -19,12 +19,9 @@ const GetFlights = () => {
     const [bookthis, setBookThis] = useState(false);
   
     useEffect(async () => {
-      const resulst = await axios(
-        'http://localhost:8080/jpareststarter/api/flight'
-      );
-      setFlightData(resulst.data);
-      
-      //flightFacade.getFlights().then(data => setFlightData(data));
+      //const resulst = await axios('http://localhost:8080/jpareststarter/api/flight/all');
+      //setFlightData(resulst.data);
+      flightFacade.getFlights().then(data => setFlightData(data));
     }, []);
 
     const handleClick = e => 
@@ -45,10 +42,17 @@ const GetFlights = () => {
             </tr>
           </thead>
           <tbody>
-            {flightData.map((flight, index) => <tr key={index}><td>{flight.flightId}</td>
-            <td>{flight.departure}</td><td>{flight.arrival}</td><td>{flight.destinationAirport}</td>
-            <td>{flight.takeoffAirport}</td><td>{flight.price} DKK</td>
-            <td><input type="button" onClick={handleClick} value="book this flight" /></td></tr>)}
+            {flightData.map((flight, index) => 
+            <tr key={index}>
+              <td>{flight.flightId}</td>
+              <td>{flight.departure}</td>
+              <td>{flight.arrival}</td>
+              <td>{flight.destinationAirport}</td>
+              <td>{flight.takeoffAirport}</td>
+              <td>{flight.price} DKK</td>
+              <td><input type="button" onClick={handleClick} value="book this flight" /></td>
+            </tr>
+            )}
           </tbody>
         </table>
         </Container>

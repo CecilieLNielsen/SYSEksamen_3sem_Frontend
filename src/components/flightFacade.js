@@ -15,7 +15,7 @@ function flightFacade() {
   }
 
   const getFlights = () => {
-    const data = fetchData("/api/flight/", "GET");
+    const data = fetchData("/api/flight", "GET");
     return data;
   }
 
@@ -25,8 +25,6 @@ function flightFacade() {
       'departure': dateToString(filter.departure), 
       'arrival': dateToString(filter.arrival)
     };
-    console.log(filter);
-    console.log(newFilter);
     const data = fetchData("/api/flight/all", "POST", newFilter);
     return data;
   }
@@ -47,7 +45,7 @@ function flightFacade() {
     var dd = String(date.getDate()).padStart(2, '0');
     var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = date.getFullYear();
-    return `${yyyy}/${mm}/${dd}`;
+    return `${yyyy}-${mm}-${dd}`;
   };
 
   return {
