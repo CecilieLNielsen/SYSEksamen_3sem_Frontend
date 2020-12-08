@@ -34,10 +34,9 @@ function flightFacade() {
     return data;
   }
 
-  const makeBooking = (body) => {
-    const data = fetchData("/api/booking/book", "POST", body)
-      .then(data => console.log(data));
-    return data;
+  async function makeBooking (body) {
+  const data = await fetchData("/api/booking/book", "POST", body);
+  return data;
   }
 
   const dateToString = (date) => {

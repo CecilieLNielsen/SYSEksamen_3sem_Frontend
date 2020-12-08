@@ -6,31 +6,22 @@ import Form from 'react-bootstrap/Form'
 
 function BookFlight () {
 
-    const init = [{
+    const init = {
         userId: "",
         flightId: ""
-    }];
-
-    const nb = { userId: "", flightId: ""};
-    const [booking, setBooking] = useState({...nb})
-    let [isBlocking, setIsBlocking] = useState(false);
-    const [response, setResponse] = useState("")
+    };
+    const [booking, setBooking] = useState(init)
+    const [response, setResponse] = useState()
     
     const handleChange = e => {
         const { id, value } = e.target;
         setBooking({ ...booking, [id]: value });
-        setIsBlocking(true);
-        
-      };
-      const handleSubmit = e => {
+    };
+    const handleSubmit = e => {
         e.preventDefault();
-        const res = flightFacade.makeBooking(booking);
-        setResponse(res.data)
-        console.log(res)
-        setBooking({...nb});
-        setIsBlocking(false);
-        console.log()
-      };
+        const data = flightFacade.makeBooking(booking);
+        data.then(data => setResponse(data.msg));
+    };
 
     return (
         <div>
@@ -45,12 +36,10 @@ function BookFlight () {
                 <br></br>
                 <button  onClick={handleSubmit} >Book it!</button>
             </Form>
-            
+            <p>{response} </p>
             </Container>
         </div>
     )
-
-
 }
 
 export default BookFlight;
