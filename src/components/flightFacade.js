@@ -61,9 +61,8 @@ function flightFacade() {
 
 
 
-    const makeBooking = (body) => {
-    const data = fetchData("/api/booking/book", "POST", body)
-    .then(data => console.log(data));
+    async function makeBooking (body) {
+    const data = await fetchData("/api/booking/book", "POST", body);
     return data;
   }
     
