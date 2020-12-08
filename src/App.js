@@ -9,9 +9,9 @@ import Home from './components/Home'
 import LogIn from './components/Login'
 import SearchResult from './components/SearchResult'
 import Bookflight from './components/BookFlight'
-
 import './css/NavbarStyle.css';
 import header from "./images/header.jpg";
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/myStyles.css';
@@ -28,8 +28,8 @@ function App() {
   const initFilter = {
     "from": "",
     "to": "",
-    "departure": "",
-    "arrival": ""
+    "departure": null,
+    "arrival": null
   }
   const [filter, setFilter] = useState(initFilter);
 
@@ -43,7 +43,7 @@ function App() {
   }
 
   return (
-    <div >
+    <div>
       <div className="my-container">
         <img className="my-image" src={header} alt="header" />
         <h1 className="my-image-text">Just Travel</h1>
