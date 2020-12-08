@@ -9,6 +9,7 @@ import Home from './components/Home'
 import LogIn from './components/Login'
 import SearchResult from './components/SearchResult'
 import Bookflight from './components/BookFlight'
+import loginFacade from './components/loginFacade';
 import './css/NavbarStyle.css';
 import header from "./images/header.jpg";
 
@@ -64,7 +65,7 @@ function App() {
 
         </Route>
         <Route path="/loginpage">
-          <LogIn />
+          <LogIn props = {loginFacade}/>
         </Route>
         <Route path="/bookflight">
           <Bookflight />

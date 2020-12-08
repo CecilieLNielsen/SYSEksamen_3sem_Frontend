@@ -1,12 +1,18 @@
 import {useState} from 'react'
 
+import loginfacade from './loginFacade'
+import Form from 'react-bootstrap/Form'
+
+import Container from 'react-bootstrap/Container'
+
 function LogIn(props) {
     const init = { username: "", password: "" };
     const [loginCredentials, setLoginCredentials] = useState(init);
 
     const performLogin = (evt) => {
         evt.preventDefault();
-        props.login(loginCredentials.username, loginCredentials.password);
+        loginfacade.login(loginCredentials.username, loginCredentials.password); 
+        
     }
 
     const onChange = (evt) => {
@@ -15,12 +21,22 @@ function LogIn(props) {
 
     return (
         <div>
+            <Container>
             <h2>Login</h2>
-            <form onChange={onChange} >
-                <input placeholder="Username" id="username" />
-                <input placeholder="Password" id="password" />
+            <Form onChange={onChange} >
+            <Form.Group >
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="username" placeholder="Username" id="username" />
+            </Form.Group>
+
+
+            <Form.Group >
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" id="password" />
+            </Form.Group>
                 <button onClick={performLogin}>Login</button>
-            </form>
+            </Form>
+            </Container>
         </div>
     )
 }
