@@ -3,6 +3,7 @@ import { baseURL } from "../settings"
 
 function handleHttpErrors(res) {
   if (!res.ok) {
+    console.log(res);
     return Promise.reject({ status: res.status, fullError: res.json() })
   }
   return res.json();

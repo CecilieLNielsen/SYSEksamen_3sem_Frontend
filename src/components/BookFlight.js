@@ -34,7 +34,7 @@ function BookFlight () {
                 <input id="userId" placeholder="userid" value = {booking.userId} onChange={handleChange}/>
                 <br></br>
                 <br></br>
-                <button  onClick={handleSubmit} >Book it!</button>
+                <button class="btn btn-primary" onClick={handleSubmit} >Book it!</button>
             </Form>
             <p>{response} </p>
             </Container>

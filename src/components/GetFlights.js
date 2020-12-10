@@ -50,7 +50,7 @@ const GetFlights = () => {
               <td>{flight.destinationAirport}</td>
               <td>{flight.takeoffAirport}</td>
               <td>{flight.price} DKK</td>
-              <td><input type="button" onClick={handleClick} value="book this flight" /></td>
+              <td><input type="button" class="btn btn-primary" onClick={handleClick} value="Book this flight" /></td>
             </tr>
             )}
           </tbody>

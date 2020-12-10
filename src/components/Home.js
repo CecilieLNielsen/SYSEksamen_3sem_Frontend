@@ -7,16 +7,21 @@ function Home() {
     return (
         <div>
             <Container>
-            <br />
-            <h1>Welcome (navn) </h1>
+            <br/>
+            <h1>Find and compare flight tickets</h1>
+      
+            <i>At Just Travel you can search for a specific flight, compare, book and save money.</i>
+            <br/>
+            <i>You can also see all available flight tickets and feel inspired.</i>
 
-            <br />
-            <br />
-            <br />
-            <h4>Destinations</h4>
+            <br/>
+            <br/>
+            <br/>
 
-            <br />
-            <br />
+            <h4>Top destinations</h4>
+
+  
+            <br/>
 
             <div className="container">
                 <div className="row">
